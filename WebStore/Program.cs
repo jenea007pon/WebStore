@@ -18,6 +18,7 @@ namespace WebStore
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(opt => opt.AddIniFile("config.ini", optional: true, reloadOnChange: true))
                 .ConfigureWebHostDefaults(host =>
                 {
                     host.UseStartup<Startup>();
