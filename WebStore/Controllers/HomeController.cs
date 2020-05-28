@@ -38,10 +38,7 @@ namespace WebStore.Controllers
 
 
         };
-        public IActionResult Index()
-        {
-            return View(__Emplyees);
-        }
+        public IActionResult Index() => View( );
         public IActionResult EmployeeDetails(int id)
         {
             var employee = __Emplyees.FirstOrDefault(e => e.Id == id);
