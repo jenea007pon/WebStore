@@ -1,0 +1,47 @@
+﻿@model EmployeeViewModel 
+
+
+@{
+    ViewData["Title"] = "Редактирвоание сотрудника id: " + Model.Id;
+}
+
+<div class="container">
+    <h3>@ViewData["Title"]</h3>
+    <hr />
+
+    <form asp-controller="Employees" asp-action="Edit" method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input asp-for="Id" type="hidden" />
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <label asp-for="Name" class="form-control"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patronymic" class="control-label"></label>
+                    <label asp-for="Patronymic" class="form-control"></label>
+                    <span asp-validation-for="Patronymic" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Age" class="control-label"></label>
+                    <label asp-for="Age" class="form-control"></label>
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="btn btn-default" />
+                    <a asp-action="Index">К списку</a>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+
