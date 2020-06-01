@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
+using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Services;
 
 namespace WebStore
 {
@@ -18,13 +20,14 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(opt => 
+            services.AddControllersWithViews(opt =>
                 {
                     //opt.Filters.Add()
                     //opt.Conventions.Add()
-
                 })
-                .AddRazorRuntimeCompilation(); 
+                .AddRazorRuntimeCompilation();
+
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
