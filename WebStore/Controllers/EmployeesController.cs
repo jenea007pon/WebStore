@@ -55,8 +55,8 @@ namespace WebStore.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel Model)
         {
-            if(Model is null)
-                throw new ArgumentException(nameof(Model))
+            if (Model is null)
+                throw new ArgumentException(nameof(Model));
 
             var employee = new Employee
             {
@@ -74,6 +74,37 @@ namespace WebStore.Controllers
 
             _EmployeesData.SaveChanges();
             
+            return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Удаление
+        public IActionResult Delete(int id)
+        {
+            if (id <= 0)
+                return BadRequest();
+
+            var employee = _EmployeesData.GetById(id);
+            if (employee is null)
+                return NotFound();
+
+            return View(new EmployeeViewModel
+            {
+                Id = employee.Id,
+                Surname = employee.Surname,
+                Name = employee.FirstName,
+                Patronymic = employee.Patronymic,
+                Age = employee.Age
+            });
+                
+
+        }
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _EmployeesData.Delete(id);
+            _EmployeesData.SaveChanges();
+
             return RedirectToAction("Index");
         }
         #endregion
