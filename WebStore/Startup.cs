@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Diagnostics;
+using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Services;
 
 namespace WebStore
 {
@@ -17,7 +20,14 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddControllersWithViews(opt =>
+                {
+                    //opt.Filters.Add()
+                    //opt.Conventions.Add()
+                })
+                .AddRazorRuntimeCompilation();
+
+            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -29,6 +39,15 @@ namespace WebStore
             }
             app.UseStaticFiles();
             app.UseDefaultFiles();
+            app.UseWelcomePage("/MVC");
+
+            app.Use(async (context, next) =>
+            {
+                Debug.WriteLine($"Request to {context.Request.Path}");
+                await next(); //можно прервать конвейер не вызывая await next()
+                //постобработка
+            });
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
