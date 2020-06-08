@@ -14,6 +14,7 @@ namespace WebStore.ViewModels
         [Display(Name = "Имя")]
         [Required(ErrorMessage = "Имя обязательно")]
         [StringLength(200, MinimumLength = 3, ErrorMessage = "Дина имени должна быть от 3 до 200 символов")]
+        [RegularExpression(@"([А-ЯЁ][а-яё]+)|([A-Z][a-z]+)", ErrorMessage = "Ошибка формата имени")]
         public string Name { get; set; }
         [Display(Name = "Фамилия")]
         [Required(ErrorMessage = "Фамилия обязательна")]
@@ -22,7 +23,7 @@ namespace WebStore.ViewModels
         public string Patronymic { get; set; }
         [Display(Name = "Возраст")]
         [Required]
-        [Range(20, 70, ErrorMessage = "Возраст  должен быт от 20 до 70 лет")]
+        [Range(20, 80, ErrorMessage = "Возраст  должен быт от 20 до 70 лет")]
         public int Age { get; set; }
 
     }
