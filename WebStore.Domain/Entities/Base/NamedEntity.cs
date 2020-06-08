@@ -1,6 +1,6 @@
-﻿using WebStore.Domain.Entityes.Base.interfaces;
+﻿using WebStore.Domain.Entities.Base.interfaces;
 
-namespace WebStore.Domain.Entityes.Base
+namespace WebStore.Domain.Entities.Base
 {
     public abstract class NamedEntity : BaseEntity, INamedEntity
     {

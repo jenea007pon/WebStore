@@ -1,7 +1,7 @@
-﻿using WebStore.Domain.Entityes.Base;
-using WebStore.Domain.Entityes.Base.interfaces;
+﻿using WebStore.Domain.Entities.Base;
+using WebStore.Domain.Entities.Base.interfaces;
 
-namespace WebStore.Domain.Entityes
+namespace WebStore.Domain.Entities
 {
     public class Section : NamedEntity, IOrderedEntity
     {

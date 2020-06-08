@@ -1,4 +1,4 @@
-﻿namespace WebStore.Domain.Entityes.Base.interfaces
+﻿namespace WebStore.Domain.Entities.Base.interfaces
 {
     public interface IOrderedEntity : IBaseEntity
     {

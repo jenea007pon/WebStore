@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
-using WebStore.Domain.Entityes.Base;
-using WebStore.Domain.Entityes.Base.interfaces;
+using WebStore.Domain.Entities.Base;
+using WebStore.Domain.Entities.Base.interfaces;
 
-namespace WebStore.Domain.Entityes
+namespace WebStore.Domain.Entityies
 {
     public class Brand : NamedEntity, IOrderedEntity
     {
