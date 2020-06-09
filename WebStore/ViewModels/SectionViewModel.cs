@@ -12,14 +12,7 @@ namespace WebStore.ViewModels
         public string Name { get; set; }
         public int Order { get; set; }
         public List<SectionViewModel> ChildSections { get; set; } = new List<SectionViewModel>();
+        public SectionViewModel ParentSection { get; set; }
 
-    }
-    public class BrandViewModel:INamedEntity, IOrderedEntity
-    {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public int Order { get; set; }
     }
 }
