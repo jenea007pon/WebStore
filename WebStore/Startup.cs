@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore.SqlServer.Update.Internal;
 using WebStore.Data;
+using WebStore.Infrastructure.Services.InSQL;
 
 namespace WebStore
 {
@@ -37,7 +38,8 @@ namespace WebStore
                 .AddRazorRuntimeCompilation();
 
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            services.AddSingleton<IProductData, InMemoryProductData>();
+            //services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDBInitializer db)
