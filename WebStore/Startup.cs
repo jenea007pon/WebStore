@@ -7,8 +7,8 @@ using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services;
-using WebStore.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using WebStore.DAL.Context;
 
 namespace WebStore
 {
@@ -22,8 +22,10 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<WebStoreDB>(opt =>
-            opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddControllersWithViews(opt =>
                 {

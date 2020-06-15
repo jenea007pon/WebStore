@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebStore.Domain.Entities;
-using WebStore.Domain.Entities.Employees;
-using WebStore.Domain.Entities.Identity;
-
+using WebStore.Domain.Entityies;
 
 namespace WebStore.DAL.Context
 {
