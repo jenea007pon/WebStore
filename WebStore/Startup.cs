@@ -7,6 +7,11 @@ using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
+using WebStore.DAL.Context;
+using Microsoft.EntityFrameworkCore.SqlServer.Update.Internal;
+using WebStore.Data;
+using WebStore.Infrastructure.Services.InSQL;
 
 namespace WebStore
 {
@@ -20,6 +25,11 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<WebStoreDB>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<WebStoreDBInitializer>();
+
             services.AddControllersWithViews(opt =>
                 {
                     //opt.Filters.Add()
@@ -28,11 +38,14 @@ namespace WebStore
                 .AddRazorRuntimeCompilation();
 
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
-            services.AddSingleton<IProductData, InMemoryProductData>();
+            //services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDBInitializer db)
         {
+            db.Initialize();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
