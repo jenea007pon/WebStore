@@ -9,6 +9,8 @@ using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
+using Microsoft.EntityFrameworkCore.SqlServer.Update.Internal;
+using WebStore.Data;
 
 namespace WebStore
 {
@@ -25,7 +27,7 @@ namespace WebStore
 
             services.AddDbContext<WebStoreDB>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddTransient<WebStoreDBInitializer>();
 
             services.AddControllersWithViews(opt =>
                 {
@@ -38,8 +40,10 @@ namespace WebStore
             services.AddSingleton<IProductData, InMemoryProductData>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDBInitializer db)
         {
+            db.Initialize();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
